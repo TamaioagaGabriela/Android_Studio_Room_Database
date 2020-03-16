@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Tema2</string>
+    <string name="full_name">First and last name</string>
+    <string name="mark">Mark</string>
+    <string name="does_not_exist">this user does not exist!</string>
+</resources>
