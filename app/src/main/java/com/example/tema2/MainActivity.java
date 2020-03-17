@@ -31,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
@@ -55,25 +53,18 @@ public class MainActivity extends AppCompatActivity {
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
                 public void onClick(View v) {
-                   //exampleList.add( new ExampleItem(edt_name.getText().toString(), edt_mark.getText().toString()));
-                   //mAdapter.notifyDataSetChanged();
-                    //db.userDao().insertAll(user);
 
                     final User user = new User(edt_name.getText().toString(), edt_mark.getText().toString());
                     new UserRepository(getApplicationContext()).insertTask(user, new OnUserRepositoryActionListener() {
                         @Override
                         public void actionSuccess() {
                             Toast.makeText(getApplicationContext(), "A fost adaugat!", Toast.LENGTH_SHORT).show();
-                            //userList.clear();
-                            //userList.addAll(new ApplicationController().getAppDatabase().userDao().getAll());
-                            //exampleListInt
                             exampleList.add(new ExampleItem(edt_name.getText().toString(), edt_mark.getText().toString()));
                             mAdapter.notifyDataSetChanged();
                         }
 
                         @Override
                         public void actionFaailed() {
-
                         }
                     });
 
@@ -83,10 +74,6 @@ public class MainActivity extends AppCompatActivity {
         btn_remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*for (int i=0; i< exampleList.size(); i++ )
-                    if (exampleList.get(i).getmText1().equals(edt_name.getText().toString()))
-                        exampleList.remove(i);
-                    mAdapter.notifyDataSetChanged();*/
                 final User user = new UserRepository(getApplicationContext()).getUserByName(edt_name.getText().toString());
                 if (user != null){
                   new UserRepository(getApplicationContext()).deleteTask(user, new OnUserRepositoryActionListener() {
@@ -101,10 +88,10 @@ public class MainActivity extends AppCompatActivity {
 
                       @Override
                       public void actionFaailed() {
-
                       }
                   });
                 }
+                else Toast.makeText(MainActivity.this, "Nu exista acest user!", Toast.LENGTH_SHORT).show();
             }
         });
 
